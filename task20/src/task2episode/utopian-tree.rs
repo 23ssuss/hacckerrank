@@ -13,9 +13,9 @@ fn utopianTree(n: i32) -> i32 {
     let mut height = 1;
     for i in 1..=n {
         if i % 2 != 0 {
-            height *= 2; // Spring: tree doubles in height
+            height *= 2; 
         } else {
-            height += 1; // Summer: tree grows by 1 meter
+            height += 1; 
         }
     }
     height
