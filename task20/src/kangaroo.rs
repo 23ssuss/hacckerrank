@@ -21,7 +21,6 @@ fn kangaroo(x1: i32, v1: i32, x2: i32, v2: i32) -> String {
             "NO".to_string()
         }
     } else {
-        // Check if the kangaroos can meet after a certain number of jumps
         if (x2 - x1) % (v1 - v2) == 0 && (x2 - x1) / (v1 - v2) > 0 {
             "YES".to_string()
         } else {
