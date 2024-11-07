@@ -1,18 +1,21 @@
 use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Write};
-
-/*
- * Complete the 'sockMerchant' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER n
- *  2. INTEGER_ARRAY ar
- */
+use std::collections::HashMap;
 
 fn sockMerchant(n: i32, ar: &[i32]) -> i32 {
+    let mut count_map = HashMap::new();
+    let mut pairs = 0;
 
+    for &sock in ar {
+        let entry = count_map.entry(sock).or_insert(0);
+        *entry += 1;
+        if *entry % 2 == 0 {
+            pairs += 1;
+        }
+    }
+
+    pairs
 }
 
 fn main() {
