@@ -3,27 +3,22 @@ use std::fs::File;
 use std::io::{self, BufRead, Write};
 
 /*
- * Complete the 'divisibleSumPairs' function below.
+ * Complete the 'hurdleRace' function below.
  *
  * The function is expected to return an INTEGER.
  * The function accepts following parameters:
- *  1. INTEGER n
- *  2. INTEGER k
- *  3. INTEGER_ARRAY ar
+ *  1. INTEGER k
+ *  2. INTEGER_ARRAY height
  */
 
-fn divisibleSumPairs(n: i32, k: i32, ar: &[i32]) -> i32 {
-    let mut count = 0;
-    for i in 0..n as usize {
-        for j in (i + 1)..n as usize {
-            if (ar[i] + ar[j]) % k == 0 {
-                count += 1;
-            }
-        }
+fn hurdleRace(k: i32, height: &[i32]) -> i32 {
+    let max_height = *height.iter().max().unwrap();
+    if max_height > k {
+        max_height - k
+    } else {
+        0
     }
-    count
 }
-
 
 fn main() {
     let stdin = io::stdin();
@@ -40,13 +35,13 @@ fn main() {
 
     let k = first_multiple_input[1].trim().parse::<i32>().unwrap();
 
-    let ar: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
+    let height: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
         .trim_end()
         .split(' ')
         .map(|s| s.to_string().parse::<i32>().unwrap())
         .collect();
 
-    let result = divisibleSumPairs(n, k, &ar);
+    let result = hurdleRace(k, &height);
 
     writeln!(&mut fptr, "{}", result).ok();
 }
