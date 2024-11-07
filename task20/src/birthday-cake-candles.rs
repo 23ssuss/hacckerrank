@@ -2,15 +2,9 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Write};
 
-/*
- * Complete the 'birthdayCakeCandles' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY candles as parameter.
- */
-
 fn birthdayCakeCandles(candles: &[i32]) -> i32 {
-
+    let max_height = *candles.iter().max().unwrap();
+    candles.iter().filter(|&&candle| candle == max_height).count() as i32
 }
 
 fn main() {
