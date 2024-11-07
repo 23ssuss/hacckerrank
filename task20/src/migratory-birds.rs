@@ -1,16 +1,25 @@
 use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Write};
-
-/*
- * Complete the 'migratoryBirds' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY arr as parameter.
- */
+use std::collections::HashMap;
 
 fn migratoryBirds(arr: &[i32]) -> i32 {
+    let mut counts = HashMap::new();
+    for &bird in arr {
+        *counts.entry(bird).or_insert(0) += 1;
+    }
 
+    let mut max_count = 0;
+    let mut result = i32::MAX;
+
+    for (&bird, &count) in counts.iter() {
+        if count > max_count || (count == max_count && bird < result) {
+            max_count = count;
+            result = bird;
+        }
+    }
+
+    result
 }
 
 fn main() {
