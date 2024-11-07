@@ -2,17 +2,23 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Write};
 
-/*
- * Complete the 'countingValleys' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER steps
- *  2. STRING path
- */
-
 fn countingValleys(steps: i32, path: &str) -> i32 {
+    let mut level = 0;
+    let mut valleys = 0;
 
+    for step in path.chars() {
+        if step == 'U' {
+            level += 1;
+        } else if step == 'D' {
+            level -= 1;
+        }
+
+        if level == 0 && step == 'U' {
+            valleys += 1;
+        }
+    }
+
+    valleys
 }
 
 fn main() {
