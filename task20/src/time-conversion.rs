@@ -10,8 +10,25 @@ use std::io::{self, BufRead, Write};
  */
 
 fn timeConversion(s: &str) -> String {
+    let (time, period) = s.split_at(8); 
+    let period = period.trim(); 
 
+    let mut hour: i32 = time[0..2].parse().unwrap(); 
+    let minute_second = &time[2..];
+
+    if period == "AM" {
+        if hour == 12 {
+            hour = 0; 
+        }
+    } else if period == "PM" {
+        if hour != 12 {
+            hour += 12; 
+        }
+    }
+
+    format!("{:02}{}", hour, minute_second)
 }
+
 
 fn main() {
     let stdin = io::stdin();
