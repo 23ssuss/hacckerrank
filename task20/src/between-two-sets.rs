@@ -2,17 +2,20 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Write};
 
-/*
- * Complete the 'getTotalX' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER_ARRAY a
- *  2. INTEGER_ARRAY b
- */
-
 fn getTotalX(a: &[i32], b: &[i32]) -> i32 {
+    let mut count = 0;
 
+    let mut x = a.iter().max().unwrap_or(&0).clone();
+    let max_b = *b.iter().min().unwrap_or(&i32::MAX);
+
+    while x <= max_b {
+        if a.iter().all(|&ai| x % ai == 0) && b.iter().all(|&bi| bi % x == 0) {
+            count += 1;
+        }
+        x += 1;
+    }
+
+    count
 }
 
 fn main() {
@@ -27,7 +30,6 @@ fn main() {
         .collect();
 
     let n = first_multiple_input[0].trim().parse::<i32>().unwrap();
-
     let m = first_multiple_input[1].trim().parse::<i32>().unwrap();
 
     let arr: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
